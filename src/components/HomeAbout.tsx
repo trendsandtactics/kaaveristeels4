@@ -30,20 +30,31 @@ export default function HomeAbout() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="w-full md:w-1/2 relative"
                 >
-                    <div className="relative w-full rounded-sm overflow-hidden shadow-2xl">
-                        <Image
-                            src="/image/kaaveriabout.png"
-                            alt="KAAVERI TMT & Structural Fabrication"
-                            width={1200}
-                            height={800}
-                            className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700 ease-in-out"
-                            priority
-                        />
-                        {/* Overlay accents */}
-                        <div className="absolute inset-0 border-8 border-white/20 pointer-events-none" />
-                        <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent-yellow/30 blur-2xl rounded-full" />
-                        <div className="absolute -top-6 -left-6 w-32 h-32 bg-accent-red/30 blur-2xl rounded-full" />
-                    </div>
+                    <a
+                        href="https://www.youtube.com/watch?v=OFUDOvewAG8"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative w-full rounded-sm overflow-hidden shadow-2xl block group z-10"
+                    >
+                        <div className="relative w-full pb-[65%] bg-black">
+                            <iframe
+                                src="https://www.youtube.com/embed/OFUDOvewAG8?autoplay=1&mute=1&loop=1&playlist=OFUDOvewAG8&controls=0&showinfo=0&rel=0"
+                                title="KAAVERI TMT YouTube Preview"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none scale-[1.15]"
+                            />
+                        </div>
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center z-10">
+                            <div className="w-16 h-16 bg-accent-red rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M4 4l12 6-12 6z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="absolute inset-0 border-8 border-white/20 pointer-events-none z-20" />
+                    </a>
+                    <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent-yellow/30 blur-2xl rounded-full z-0" />
+                    <div className="absolute -top-6 -left-6 w-32 h-32 bg-accent-red/30 blur-2xl rounded-full z-0" />
                     {/* Decorative element */}
                     <div className="hidden md:block absolute -right-6 -bottom-6 w-full h-full border-2 border-accent-red/20 -z-10 rounded-sm" />
                 </motion.div>

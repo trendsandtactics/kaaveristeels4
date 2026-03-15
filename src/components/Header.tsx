@@ -21,6 +21,15 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.location.pathname === "/") {
+        const heroSection = document.getElementById("hero-video-section");
+
+        if (heroSection) {
+          const heroSectionBottom =
+            heroSection.offsetTop + heroSection.offsetHeight;
+          setScrolled(window.scrollY >= heroSectionBottom - 80);
+          return;
+        }
+
         const steelSection = document.getElementById("steel-scroll-section");
 
         if (steelSection) {
