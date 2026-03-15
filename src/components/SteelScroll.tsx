@@ -1,34 +1,39 @@
 "use client";
 
 export default function SteelScroll() {
-    return (
-        <div
-            id="steel-scroll-section"
-            className="relative h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] w-full bg-transparent overflow-hidden flex items-center justify-center"
-        >
-            <video
-                className="absolute inset-0 w-full h-full object-cover"
-                src="/hero2.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-            />
+  return (
+    <section
+      id="steel-scroll-section"
+      className="relative w-full h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] overflow-hidden"
+    >
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/hero2.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/80 z-[1]" />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80 z-[1]" />
 
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-end pointer-events-none">
-                <div className="absolute bottom-32 text-center max-w-4xl px-4 flex flex-col items-center pointer-events-auto">
-                    <h2 className="font-heading text-5xl md:text-7xl text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] leading-tight font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-accent-grey">
-                        Building India&apos;s Future.
-                    </h2>
+      {/* Bottom Content */}
+      <div className="absolute bottom-10 left-0 right-0 z-10 px-6 md:px-16 flex items-end justify-between">
 
-                    <button className="mt-12 px-8 py-4 bg-accent-yellow text-black font-body font-bold text-sm md:text-lg uppercase tracking-wider rounded-sm shadow-[0_0_30px_rgba(234,179,8,0.3)]">
-                        Explore Our Products
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
+        {/* Title */}
+        <h2 className="font-heading text-3xl md:text-6xl text-white font-bold leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] max-w-2xl">
+          Building India&apos;s Future.
+        </h2>
+
+        {/* Button */}
+        <button className="px-6 py-3 bg-accent-yellow text-black font-bold text-xs md:text-sm uppercase tracking-wider rounded-sm shadow-[0_0_30px_rgba(234,179,8,0.35)] hover:scale-105 transition duration-300">
+          Explore Our Products
+        </button>
+
+      </div>
+    </section>
+  );
 }
