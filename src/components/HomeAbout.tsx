@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function HomeAbout() {
+    const [playVideo, setPlayVideo] = useState(false);
+
     return (
         <section className="relative w-full py-16 px-6 md:px-12 overflow-hidden">
             {/* Background Image Layer */}
@@ -26,7 +28,9 @@ export default function HomeAbout() {
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: false, margin: "-100px" }}
+                    onViewportEnter={() => setPlayVideo(true)}
+                    onViewportLeave={() => setPlayVideo(false)}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="w-full md:w-1/2 relative"
                 >
@@ -37,12 +41,14 @@ export default function HomeAbout() {
                         className="relative w-full rounded-sm overflow-hidden shadow-2xl block group z-10"
                     >
                         <div className="relative w-full pb-[65%] bg-black">
-                            <iframe
-                                src="https://www.youtube.com/embed/OFUDOvewAG8?autoplay=1&mute=0&loop=1&playlist=OFUDOvewAG8&controls=0&showinfo=0&rel=0"
-                                title="KAAVERI TMT YouTube Preview"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none scale-[1.15]"
-                            />
+                            {playVideo && (
+                                <iframe
+                                    src="https://www.youtube.com/embed/OFUDOvewAG8?autoplay=1&mute=0&loop=1&playlist=OFUDOvewAG8&controls=0&showinfo=0&rel=0"
+                                    title="KAAVERI TMT YouTube Preview"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none scale-[1.15]"
+                                />
+                            )}
                         </div>
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center z-10">
                             <div className="w-16 h-16 bg-accent-red rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">

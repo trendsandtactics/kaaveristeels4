@@ -7,7 +7,7 @@ export default function SteelScroll() {
             className="relative h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] w-full bg-transparent overflow-hidden flex items-center justify-center"
         >
             <video
-                className="absolute inset-0 w-full h-full object-contain"
+                className="absolute inset-0 w-full h-full object-cover"
                 src="/hero2.mp4"
                 autoPlay
                 muted
