@@ -24,42 +24,48 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       if (pathname === "/") {
-        const steelSection = document.getElementById("steel-scroll-section");
+        const heroSection = document.getElementById("steel-scroll-section");
 
-        if (steelSection) {
-          const steelSectionBottom =
-            steelSection.offsetTop + steelSection.offsetHeight;
+        if (heroSection) {
+          const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
 
-          setScrolled(window.scrollY >= steelSectionBottom - 80);
+          // Transparent while inside hero
+          setScrolled(window.scrollY > heroBottom - 120);
           return;
         }
+
+        // fallback for homepage if section not found
+        setScrolled(window.scrollY > window.innerHeight - 120);
+        return;
       }
 
-      setScrolled(window.scrollY > 50);
+      // other pages always white header
+      setScrolled(true);
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [pathname]);
 
-  const isDarkHero = isHomePage && !scrolled;
+  const isTransparentHeader = isHomePage && !scrolled;
 
-  const headerBg = isDarkHero
+  const headerBg = isTransparentHeader
     ? "bg-transparent py-6"
     : "bg-white shadow-sm py-4 border-b border-gray-200";
 
-  const currentLogo = isDarkHero
-    ? "/logo.png"
-    : "/logo3.png";
+  const currentLogo = isTransparentHeader ? "/logo.png" : "/logo3.png";
 
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ease-in-out ${headerBg}`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-
         <Link
           href="/"
           className="flex items-center z-50 transition-transform hover:scale-105"
@@ -77,16 +83,15 @@ export default function Header() {
               key={link.name}
               href={link.href}
               className={`relative font-body text-[10px] md:text-xs uppercase tracking-[0.2em] transition-colors group overflow-hidden font-semibold ${
-                isDarkHero
+                isTransparentHeader
                   ? "text-white/90 hover:text-white"
                   : "text-black hover:text-accent-red"
               }`}
             >
               {link.name}
-
               <span
                 className={`absolute bottom-0 left-0 w-full h-[2px] transform -translate-x-full transition-transform duration-300 group-hover:translate-x-0 ${
-                  isDarkHero ? "bg-white" : "bg-accent-red"
+                  isTransparentHeader ? "bg-white" : "bg-accent-red"
                 }`}
               />
             </Link>
@@ -96,32 +101,30 @@ export default function Header() {
             <span className="relative z-10 transition-colors duration-300 group-hover:text-accent-red">
               Request Quote
             </span>
-
             <div className="absolute inset-0 bg-white transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 z-0" />
           </button>
         </nav>
 
-        {/* MOBILE MENU BUTTON */}
-
         <button
           className={`lg:hidden z-50 w-8 h-8 flex flex-col justify-center items-end gap-1 ${
-            isDarkHero ? "text-white" : "text-black"
+            isTransparentHeader ? "text-white" : "text-black"
           }`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
         >
           <span
-            className={`block h-[2px] ${
-              isDarkHero ? "bg-white" : "bg-black"
+            className={`block h-[2px] transition-all duration-300 ${
+              isTransparentHeader ? "bg-white" : "bg-black"
             } ${mobileMenuOpen ? "w-5 rotate-45 translate-y-[6px]" : "w-6"}`}
           />
           <span
-            className={`block h-[2px] ${
-              isDarkHero ? "bg-white" : "bg-black"
-            } ${mobileMenuOpen ? "opacity-0" : "w-5"}`}
+            className={`block h-[2px] transition-all duration-300 ${
+              isTransparentHeader ? "bg-white" : "bg-black"
+            } ${mobileMenuOpen ? "opacity-0 w-5" : "w-5"}`}
           />
           <span
-            className={`block h-[2px] ${
-              isDarkHero ? "bg-white" : "bg-black"
+            className={`block h-[2px] transition-all duration-300 ${
+              isTransparentHeader ? "bg-white" : "bg-black"
             } ${mobileMenuOpen ? "w-5 -rotate-45 -translate-y-[6px]" : "w-3"}`}
           />
         </button>
@@ -136,7 +139,6 @@ export default function Header() {
               className="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center p-8"
             >
               <div className="flex flex-col items-center gap-8">
-
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.name}
@@ -153,12 +155,10 @@ export default function Header() {
                     </Link>
                   </motion.div>
                 ))}
-
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
     </header>
   );
