@@ -24,8 +24,8 @@ export default function SteelScroll() {
       <div className="absolute inset-0 z-10 flex items-end">
         <div className="max-w-7xl mx-auto w-full px-6 md:px-12 pb-24">
 
-          <h2 className="font-heading text-4xl md:text-7xl text-white font-bold leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] max-w-xl">
-            Building India&apos;s Future.
+          <h2 className="font-heading text-3xl md:text-6xl text-white font-bold leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] max-w-xl">
+            Building India&apos;s Future
           </h2>
 
           <button className="mt-8 px-8 py-4 bg-accent-yellow text-black font-bold text-sm md:text-lg uppercase tracking-wider rounded-sm shadow-[0_0_30px_rgba(234,179,8,0.35)] hover:scale-105 transition duration-300">
