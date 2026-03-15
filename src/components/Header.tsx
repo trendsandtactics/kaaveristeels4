@@ -44,17 +44,15 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  const isTop = !scrolled;
-  const isDarkHero = isHomePage && isTop;
+  const isDarkHero = isHomePage && !scrolled;
 
-  const headerBg = isTop
+  const headerBg = isDarkHero
     ? "bg-transparent py-6"
     : "bg-white shadow-sm py-4 border-b border-gray-200";
 
-  /* LOGO SWITCH */
   const currentLogo = isDarkHero
-    ? "/image/logo.png"     // hero transparent
-    : "/image/logo3.png";   // white header
+    ? "/logo.png"
+    : "/logo3.png";
 
   return (
     <header
@@ -103,34 +101,30 @@ export default function Header() {
           </button>
         </nav>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
 
         <button
-          className={`lg:hidden z-50 w-8 h-8 flex flex-col justify-center items-end gap-1 focus:outline-none ${
+          className={`lg:hidden z-50 w-8 h-8 flex flex-col justify-center items-end gap-1 ${
             isDarkHero ? "text-white" : "text-black"
           }`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <span
-            className={`block h-[2px] transition-all duration-300 ${
+            className={`block h-[2px] ${
               isDarkHero ? "bg-white" : "bg-black"
             } ${mobileMenuOpen ? "w-5 rotate-45 translate-y-[6px]" : "w-6"}`}
           />
-
           <span
-            className={`block h-[2px] transition-all duration-300 ${
+            className={`block h-[2px] ${
               isDarkHero ? "bg-white" : "bg-black"
-            } ${mobileMenuOpen ? "w-5 opacity-0" : "w-5"}`}
+            } ${mobileMenuOpen ? "opacity-0" : "w-5"}`}
           />
-
           <span
-            className={`block h-[2px] transition-all duration-300 ${
+            className={`block h-[2px] ${
               isDarkHero ? "bg-white" : "bg-black"
             } ${mobileMenuOpen ? "w-5 -rotate-45 -translate-y-[6px]" : "w-3"}`}
           />
         </button>
-
-        {/* MOBILE MENU */}
 
         <AnimatePresence>
           {mobileMenuOpen && (
@@ -138,10 +132,10 @@ export default function Header() {
               initial={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
               animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
               exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{ duration: 0.5 }}
               className="fixed inset-0 bg-white/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center p-8"
             >
-              <div className="flex flex-col items-center gap-8 w-full max-w-sm mt-12">
+              <div className="flex flex-col items-center gap-8">
 
                 {navLinks.map((link, i) => (
                   <motion.div
@@ -153,21 +147,12 @@ export default function Header() {
                     <Link
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="font-heading text-xl md:text-2xl text-black hover:text-gray-700 transition-colors"
+                      className="text-xl text-black"
                     >
                       {link.name}
                     </Link>
                   </motion.div>
                 ))}
-
-                <motion.button
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  className="mt-8 w-full py-3 bg-accent-red text-white font-body text-[10px] uppercase tracking-widest font-bold border-2 border-accent-red hover:bg-white hover:text-accent-red transition-all"
-                >
-                  Request Quote
-                </motion.button>
 
               </div>
             </motion.div>
