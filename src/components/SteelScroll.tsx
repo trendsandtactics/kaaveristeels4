@@ -18,7 +18,7 @@ export default function SteelScroll() {
       />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/80 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80 z-[1]" />
 
       {/* Content Wrapper aligned with header */}
       <div className="absolute inset-0 z-10 flex items-end">
