@@ -4,7 +4,7 @@ export default function SteelScroll() {
   return (
     <section
       id="steel-scroll-section"
-      className="relative w-full h-[calc(100vh-5rem)] md:h-[calc(100vh-6rem)] overflow-hidden"
+      className="relative w-full h-screen overflow-hidden -mt-20 md:-mt-24"
     >
       {/* Background Video */}
       <video
